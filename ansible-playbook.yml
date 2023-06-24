@@ -16,5 +16,11 @@
     become : yes
     become_user : root
 
+  - name: stop container
+    command: sudo docker stop medicure
+    
+  - name: remove container
+    command: sudo docker rm medicure
+
   - name: Deploy Docker Container
     command: docker run -itd -p 8084:8082 sailanadh123/medicure:1.0
