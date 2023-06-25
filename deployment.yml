@@ -16,4 +16,4 @@ spec:
         - name: medicure
           image: sailanadh123/medicure:1.0
           ports:
-            - containerPort: 8084
+            - containerPort: 8082
