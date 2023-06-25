@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -100,7 +100,7 @@ resource "aws_security_group" "proj-sg" {
 #Create Network interfaces
 resource "aws_network_interface" "proj-ni" {
   subnet_id       = aws_subnet.proj-subnet.id
-  private_ips     = ["10.0.1.20"]
+  private_ips     = ["10.0.1.30"]
   security_groups = [aws_security_group.proj-sg.id]
 }
 
@@ -108,16 +108,16 @@ resource "aws_network_interface" "proj-ni" {
 resource "aws_eip" "proj-eip" {
   vpc                       = true
   network_interface         = aws_network_interface.proj-ni.id
-  associate_with_private_ip = "10.0.1.20"
+  associate_with_private_ip = "10.0.1.30"
 }
 
 
 #Creating Ec2 instance
 resource "aws_instance" "proj-instance" {
-  ami           = "ami-0989fb15ce71ba39e" # eu-north-1
+  ami           = "ami-0989fb15ce71ba39e" 
   instance_type = "t3.medium"
   availability_zone = "eu-north-1b"
-  key_name = "EC2KEYPAIR"
+  key_name = "project.pem"
 
   network_interface {
     network_interface_id = aws_network_interface.proj-ni.id
@@ -126,6 +126,6 @@ resource "aws_instance" "proj-instance" {
   
 
   tags = {
-      Name = "production-server"
+      Name = "prod-server"
   }
 }
