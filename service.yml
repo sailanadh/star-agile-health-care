@@ -7,7 +7,7 @@ spec:
     app: medicure
   ports:
     - protocol: TCP
-      port: 8084
-      targetPort: 8084
-      nodePort: 30080
+      port: 8082
+      targetPort: 8082
+      nodePort: 30005
   type: NodePort
