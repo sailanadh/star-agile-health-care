@@ -100,7 +100,7 @@ resource "aws_security_group" "proj-sg" {
 #Create Network interfaces
 resource "aws_network_interface" "proj-ni" {
   subnet_id       = aws_subnet.proj-subnet.id
-  private_ips     = ["10.0.1.30"]
+  private_ips     = ["10.0.1.36"]
   security_groups = [aws_security_group.proj-sg.id]
 }
 
@@ -108,13 +108,13 @@ resource "aws_network_interface" "proj-ni" {
 resource "aws_eip" "proj-eip" {
   vpc                       = true
   network_interface         = aws_network_interface.proj-ni.id
-  associate_with_private_ip = "10.0.1.30"
+  associate_with_private_ip = "10.0.1.36"
 }
 
 
 #Creating Ec2 instance
 resource "aws_instance" "proj-instance" {
-  ami           = "ami-0989fb15ce71ba39e" 
+  ami           = "ami-08766f81ab52792ce" 
   instance_type = "t3.medium"
   availability_zone = "eu-north-1b"
   key_name = "project.pem"
