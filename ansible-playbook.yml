@@ -1,5 +1,5 @@
 - name : Configure Docker on EC2 Instances
-  hosts : web-server
+  hosts : test-server
   become: true
   connection : ssh
   tasks : 
@@ -15,12 +15,6 @@
     command : sudo systemctl start docker
     become : yes
     become_user : root
-
-  - name: stop container
-    command: sudo docker stop medicure
-    
-  - name: remove container
-    command: sudo docker rm medicure
 
   - name: Deploy Docker Container
     command: docker run -itd -p 8084:8082 --name medicure sailanadh123/medicure:1.0
